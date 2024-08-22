@@ -1,6 +1,8 @@
 //this is preapproval form field needs to add 
 import React, { useState } from 'react';
 import axios from 'axios';
+import Navbar from './Navbar';
+import './Navbarcss.css';
 
 function FormSubmission() {
     const [form, setForm] = useState({ userName: '', requestDetails: '' });
@@ -18,11 +20,23 @@ function FormSubmission() {
     };
 
     return (
-        <div>
-            <h2>Submit Form for Approval</h2>
-            <input name="userName" placeholder="Your Name" value={form.userName} onChange={handleChange} />
-            <textarea name="requestDetails" placeholder="Request Details" value={form.requestDetails} onChange={handleChange} />
-            <button onClick={handleSubmit}>Submit</button>
+        <div className="form-submission">
+            <h2>Submit Approval Form</h2>
+            <form>
+                <label htmlFor="username">Name:</label>
+                <input type="text" id="username" required />
+                
+                <label htmlFor="email">Email:</label>
+                <input type="email" id="email" required />
+                
+                <label htmlFor="stock">Select Stock:</label>
+                <select id="stock">
+                    <option value="stock1">Stock 1</option>
+                    <option value="stock2">Stock 2</option>
+                </select>
+
+                <button type="submit">Submit</button>
+            </form>
         </div>
     );
 }
