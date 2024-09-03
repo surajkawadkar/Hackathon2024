@@ -12,17 +12,28 @@ app.use(express.json()); // Parses incoming JSON requests
 
 // Routes
 app.post('/api/forms/submit', (req, res) => {
-    const { userName, email, selectedStock } = req.body;
-
-    // Example logic to determine the status (you can replace this with your actual logic)
+    const { userName, ticker,noOfStocks,price, selectedStock } = req.body;
+    
+    
+    let restrictedTicker= ['RVNL', 'TITH']
+    let whitelistedTicker = ['ITC','HDFCB']
     let status;
-    if (selectedStock === 'stock1') {
-        status = 'approved';
-    } else if (selectedStock === 'stock2') {
+    if (restrictedTicker.includes(ticker) ) {
+        // status = 'approved';
         status = 'rejected';
+    } else if (whitelistedTicker.includes(ticker) ) {
+        // status = 'rejected';
+        status = 'approved';
     } else {
         status = 'manual';
     }
+    // if (selectedStock === 'stock1') {
+    //     status = 'approved';
+    // } else if (selectedStock === 'stock2') {
+    //     status = 'rejected';
+    // } else {
+    //     status = 'manual';
+    // }
 
     // Respond with a JSON object
     res.json({ status });
